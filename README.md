@@ -66,7 +66,7 @@ O projeto utiliza um arquivo JSON local como mock do endpoint `GET /v1/traffic/s
       "predictions": {
         "vehicleDensity": 0.8,
         "averageSpeed": 50.0,
-        "weather": "clouded"
+        "weather": "foggy"
       }
     },
     {
