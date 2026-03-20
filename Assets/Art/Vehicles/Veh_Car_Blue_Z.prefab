@@ -463,7 +463,7 @@ GameObject:
   - component: {fileID: 428284}
   - component: {fileID: 3316900}
   - component: {fileID: 2369556}
-  - component: {fileID: 7937596396223858774}
+  - component: {fileID: 1680903572644251214}
   m_Layer: 0
   m_Name: Veh_Car_Blue_Z
   m_TagString: Veiculo
@@ -548,8 +548,8 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &7937596396223858774
-MeshCollider:
+--- !u!65 &1680903572644251214
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -566,10 +566,9 @@ MeshCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 6df34ee591500634282ce8431bcb6976, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 3.1628082, y: 2.268413, z: 5.323663}
+  m_Center: {x: 0, y: 1.4060061, z: 0}
 --- !u!1 &6399623105327882833
 GameObject:
   m_ObjectHideFlags: 0
