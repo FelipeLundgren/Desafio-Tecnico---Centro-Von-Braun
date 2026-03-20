@@ -81,4 +81,12 @@ public class VehicleSpawner : MonoBehaviour
         mover.speed = vehicleSpeed;
         mover.destroyX = destroyX;
     }
+    public void PararSpawn()
+    {
+        if (spawnCoroutine != null)
+        {
+            StopCoroutine(spawnCoroutine);
+            spawnCoroutine = null;
+        }
+    }
 }

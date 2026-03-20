@@ -1056,6 +1056,7 @@ GameObject:
   - component: {fileID: 1510915989}
   - component: {fileID: 1510915988}
   - component: {fileID: 1510915990}
+  - component: {fileID: 1510915991}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1102,6 +1103,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1e17f6cc9fd1eb4fb7483fd420bc8aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PredictionScheduler
+--- !u!114 &1510915991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510915987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ceba50db1e5e64181999647eba6cc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
 --- !u!1 &1804825486
 GameObject:
   m_ObjectHideFlags: 0

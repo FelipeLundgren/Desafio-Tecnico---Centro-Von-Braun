@@ -6,7 +6,7 @@ public class PlayerCollision : MonoBehaviour
     {
         if (other.CompareTag("Veiculo"))
         {
-            Debug.Log("[GAME OVER] A galinha foi atropelada!");
+            GameManager.Instance.TriggerGameOver();
         }
     }
 }
