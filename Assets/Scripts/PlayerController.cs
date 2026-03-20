@@ -6,6 +6,12 @@ public class PlayerController : MonoBehaviour
     [Header("Movimento")]
     public float baseSpeed = 5f;
 
+    [Header("Limites da pista")]
+    public float limiteZMin = -25f;
+    public float limiteZMax = 35f;
+    public float limiteXMin = -20f;
+    public float limiteXMax = 30f;
+
     private float currentSpeed;
     private CharacterController characterController;
 
@@ -50,6 +56,17 @@ public class PlayerController : MonoBehaviour
         if (Keyboard.current.downArrowKey.isPressed) moveZ = -1f;
 
         characterController.Move(new Vector3(moveX, 0, moveZ) * currentSpeed * Time.deltaTime);
+        // Clamp da posição dentro dos limites da pista
+        Vector3 pos = transform.position;
+        pos.z = Mathf.Clamp(pos.z, limiteZMin, limiteZMax);
+        pos.x = Mathf.Clamp(pos.x, limiteXMin, limiteXMax);
+
+        if (pos != transform.position)
+        {
+            characterController.enabled = false;
+            transform.position = pos;
+            characterController.enabled = true;
+        }
     }
 
     void AplicarClima(TrafficResponse data)
