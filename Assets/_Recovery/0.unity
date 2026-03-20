@@ -554,10 +554,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   baseSpeed: 12.5
-  limiteZMin: -30
-  limiteZMax: 50
-  limiteXMin: -90
-  limiteXMax: 120
 --- !u!65 &377394342
 BoxCollider:
   m_ObjectHideFlags: 0
