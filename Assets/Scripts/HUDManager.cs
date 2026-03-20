@@ -15,7 +15,6 @@ public class HUDManager : MonoBehaviour
     private float timerTotal = 0f;
     private float timerAtual = 0f;
     private bool timerRodando = false;
-    private int nivelAtual = GameManager.Instance.NivelAtual;
 
     void OnEnable()
     {

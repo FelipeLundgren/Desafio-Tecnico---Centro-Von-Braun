@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour
     }
     public void AvancarFase()
     {
-        NivelAtual++; // deve ser a primeira linha
+        NivelAtual++;
 
         VehicleMove[] carros = FindObjectsOfType<VehicleMove>();
         foreach (VehicleMove carro in carros)
