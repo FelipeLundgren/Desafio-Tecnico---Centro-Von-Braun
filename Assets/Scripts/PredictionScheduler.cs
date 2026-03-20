@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class PredictionScheduler : MonoBehaviour
 {
+    // Evento para notificar outros sistemas quando o clima trocar
+    public static event System.Action<Status> OnClimaAtualizado;
+
     void OnEnable()
     {
         ApiDataLoader.OnDataLoaded += AgendarPredicoes;
@@ -16,19 +19,10 @@ public class PredictionScheduler : MonoBehaviour
     {
         foreach (PredictedStatus predicao in data.predicted_status)
         {
-            // Converte milissegundos para segundos
             float tempoEmSegundos = predicao.estimated_time / 1000f;
-
-            // Captura os dados da predição para usar dentro do lambda
             Status status = predicao.predictions;
-
-            Invoke_Schedulado(tempoEmSegundos, status);
+            StartCoroutine(AguardarETrocar(tempoEmSegundos, status));
         }
-    }
-
-    void Invoke_Schedulado(float delay, Status status)
-    {
-        StartCoroutine(AguardarETrocar(delay, status));
     }
 
     System.Collections.IEnumerator AguardarETrocar(float delay, Status status)
@@ -38,5 +32,8 @@ public class PredictionScheduler : MonoBehaviour
         Debug.Log($"[CLIMA ATUALIZADO] {status.weather} | " +
                   $"Densidade: {status.vehicleDensity} | " +
                   $"Velocidade: {status.averageSpeed} km/h");
+
+        // Notifica o PlayerController e qualquer outro sistema
+        OnClimaAtualizado?.Invoke(status);
     }
 }
