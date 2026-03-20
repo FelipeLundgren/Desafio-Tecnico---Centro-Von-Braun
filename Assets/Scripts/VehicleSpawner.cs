@@ -43,6 +43,8 @@ public class VehicleSpawner : MonoBehaviour
 
     void AplicarStatus(Status status)
     {
+        if (!enabled) return; // ignora se o spawner estiver parado
+
         // Fórmula do desafio: intervalo = 1 / densidade
         spawnInterval = 1f / status.vehicleDensity;
 
@@ -51,7 +53,6 @@ public class VehicleSpawner : MonoBehaviour
 
         Debug.Log($"[SPAWNER] Intervalo: {spawnInterval:F2}s | Velocidade: {vehicleSpeed:F2} u/s");
 
-        // Reinicia o spawn com os novos valores
         if (spawnCoroutine != null)
             StopCoroutine(spawnCoroutine);
 
@@ -88,5 +89,6 @@ public class VehicleSpawner : MonoBehaviour
             StopCoroutine(spawnCoroutine);
             spawnCoroutine = null;
         }
+        enabled = false; // garante que AplicarStatus não reinicie
     }
 }
