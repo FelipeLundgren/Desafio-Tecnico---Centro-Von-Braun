@@ -10,7 +10,7 @@
       "predictions": {
         "vehicleDensity": 0.8,
         "averageSpeed": 50.0,
-        "weather": "clouded"
+        "weather": "foggy"
       }
     },
     {
