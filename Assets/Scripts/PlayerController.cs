@@ -21,10 +21,22 @@ public class PlayerController : MonoBehaviour
         PredictionScheduler.OnClimaAtualizado -= AplicarClima;
     }
 
+    private Vector3 posicaoInicial;
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
         currentSpeed = baseSpeed;
+        posicaoInicial = transform.position; // salva posição inicial
+    }
+
+    public void Resetar()
+    {
+        // Desativa o CharacterController para poder mover o personagem
+        characterController.enabled = false;
+        transform.position = posicaoInicial;
+        characterController.enabled = true;
+        enabled = true;
     }
 
     void Update()

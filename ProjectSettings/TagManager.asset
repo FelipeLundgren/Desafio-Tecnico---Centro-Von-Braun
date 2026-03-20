@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Veiculo
+  - 'Chegada '
   layers:
   - Default
   - TransparentFX

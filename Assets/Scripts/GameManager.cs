@@ -5,9 +5,11 @@ using UnityEngine.InputSystem;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+    
 
     private bool jogoAtivo = false;
     private bool gameOver = false;
+    public int NivelAtual { get; private set; } = 1;
 
     void Awake()
     {
@@ -50,8 +52,6 @@ public class GameManager : MonoBehaviour
         gameOver = true;
         jogoAtivo = false;
 
-        Debug.Log("[GAME OVER]");
-
         // Para o spawn
         VehicleSpawner spawner = FindObjectOfType<VehicleSpawner>();
         if (spawner != null) spawner.PararSpawn();
@@ -64,9 +64,53 @@ public class GameManager : MonoBehaviour
         VehicleMove[] carros = FindObjectsOfType<VehicleMove>();
         foreach (VehicleMove carro in carros)
             carro.enabled = false;
+
+        // Mostra tela de Game Over
+        HUDManager hud = FindObjectOfType<HUDManager>();
+        if (hud != null) hud.MostrarGameOver();
     }
 
     public bool JogoAtivo() => jogoAtivo;
+    public void TriggerVitoria()
+    {
+        if (!jogoAtivo || gameOver) return;
+
+        jogoAtivo = false;
+
+        // Para o spawn
+        VehicleSpawner spawner = FindObjectOfType<VehicleSpawner>();
+        if (spawner != null) spawner.PararSpawn();
+
+        // Para o jogador
+        PlayerController player = FindObjectOfType<PlayerController>();
+        if (player != null) player.enabled = false;
+
+        // Para todos os carros
+        VehicleMove[] carros = FindObjectsOfType<VehicleMove>();
+        foreach (VehicleMove carro in carros)
+            carro.enabled = false;
+
+        // Mostra tela de vitória
+        HUDManager hud = FindObjectOfType<HUDManager>();
+        if (hud != null) hud.MostrarVitoria();
+    }
+    public void AvancarFase()
+    {
+        NivelAtual++; // deve ser a primeira linha
+
+        VehicleMove[] carros = FindObjectsOfType<VehicleMove>();
+        foreach (VehicleMove carro in carros)
+            Destroy(carro.gameObject);
+
+        PlayerController player = FindObjectOfType<PlayerController>();
+        if (player != null) player.Resetar();
+
+        VehicleSpawner spawner = FindObjectOfType<VehicleSpawner>();
+        if (spawner != null) spawner.enabled = true;
+
+        ApiDataLoader loader = FindObjectOfType<ApiDataLoader>();
+        if (loader != null) loader.LoadData();
+    }
 
 
 }

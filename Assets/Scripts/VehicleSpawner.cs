@@ -70,17 +70,24 @@ public class VehicleSpawner : MonoBehaviour
 
     void SpawnVeiculo()
     {
-        // Escolhe prefab e faixa aleatórios
-        GameObject prefab = vehiclePrefabs[Random.Range(0, vehiclePrefabs.Length)];
-        float laneZ = lanePositionsZ[Random.Range(0, lanePositionsZ.Length)];
+        int nivel = GameManager.Instance != null ? GameManager.Instance.NivelAtual : 1;
 
-        Vector3 spawnPos = new Vector3(spawnX, spawnY, laneZ);
-        GameObject veiculo = Instantiate(prefab, spawnPos, Quaternion.Euler(0f, 90f, 0f));
+        // A cada 2 níveis spawna um carro a mais, máximo de 4
+        int quantidadeCarros = Mathf.Min(1 + (nivel - 1) / 1, 8);
 
-        // Passa a velocidade para o veículo se mover sozinho
-        VehicleMove mover = veiculo.AddComponent<VehicleMove>();
-        mover.speed = vehicleSpeed;
-        mover.destroyX = destroyX;
+        for (int i = 0; i < quantidadeCarros; i++)
+        {
+            GameObject prefab = vehiclePrefabs[Random.Range(0, vehiclePrefabs.Length)];
+            float laneZ = lanePositionsZ[Random.Range(0, lanePositionsZ.Length)];
+
+            Vector3 spawnPos = new Vector3(spawnX, spawnY, laneZ);
+            GameObject veiculo = Instantiate(prefab, spawnPos, Quaternion.Euler(0f, 90f, 0f));
+
+            VehicleMove mover = veiculo.AddComponent<VehicleMove>();
+            mover.speed = vehicleSpeed;
+            mover.destroyX = destroyX;
+        }
+        Debug.Log($"[SPAWNER] Nível {nivel} | Carros por spawn: {quantidadeCarros}");
     }
     public void PararSpawn()
     {
